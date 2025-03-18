@@ -1,21 +1,42 @@
 export type StarSize = 's' | 'm' | 'l';
 
 type StarProps = {
-  marked: boolean;
   starId: number;
+  marked: boolean;
+  hovered: boolean;
+  isInput: boolean;
   size?: StarSize;
+  onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };
 
-const Star = ({ marked, starId, size = 'm' }: StarProps) => {
-  const sizeClass =
-    size === 's' ? 'text-xs' : size === 'l' ? 'text-3xl' : 'text';
+const Star = ({
+  starId,
+  marked,
+  hovered = false,
+  isInput,
+  size = 'm',
+  ...handlers
+}: StarProps) => {
+  const classes = [
+    'star',
+    isInput && 'cursor-pointer',
+    hovered && 'hovered',
+    marked && 'marked',
+    size === 's' ? 'text-xs' : size === 'l' ? 'text-3xl' : 'text',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
     <span
       data-star-id={starId}
-      className={`${sizeClass} cursor-pointer`}
-      role="button"
+      className={classes}
+      role={isInput ? 'button' : undefined}
+      {...handlers}
     >
-      {marked ? '\u2605' : '\u2606'}
+      {'\u2605'}
     </span>
   );
 };

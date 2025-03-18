@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-50: #f8f8ff;
+  --primary-100: #f3ecff;
+  --primary-200: #eee4ff;
+  --primary-300: #cec0fe;
+  --primary-400: #a990ff;
+  --primary-500: #8b6ffe;
+  --primary-600: #7257ea;
+  --primary-700: #6244e5;
+  --primary-900: #332f4a;
+}
 
 body {
   margin: 2em;
@@ -11,4 +22,14 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.star {
+  color: var(--primary-100);
+}
+.star.marked {
+  color: var(--primary-700);
+}
+.star.hovered {
+  color: var(--primary-400);
 }
