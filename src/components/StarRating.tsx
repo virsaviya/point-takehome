@@ -1,23 +1,18 @@
-import Star from "@/components/Star";
+import Star, { StarSize } from '@/components/Star';
 
-const StarRating = () => {
-  return (
-    <section className="flex flex-col items-center">
-      <div>
-        <Star starId={1} marked={false} />
-        <Star starId={2} marked={false} />
-        <Star starId={3} marked={false} />
-        <Star starId={4} marked={false} />
-        <Star starId={5} marked={false} />
-      </div>
-      <input
-        type="submit"
-        className="mt-10 h-10 px-6 font-semibold rounded-md bg-black text-white"
-        value="Submit review"
-      />
-    </section>
-  );
+const StarRating = ({
+  rating,
+  size = 'm',
+}: {
+  rating: number;
+  size?: StarSize;
+}) => {
+  const stars = [];
+  for (let i = 1; i < 6; i++) {
+    stars.push(<Star starId={i} marked={i <= rating} size={size} />);
+  }
+
+  return <div className="flex">{stars}</div>;
 };
 
-StarRating.displayName = "StarRating";
 export default StarRating;

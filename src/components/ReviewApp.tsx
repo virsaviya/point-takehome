@@ -1,4 +1,4 @@
-import StarRating from "@/components/StarRating";
+import StarRatingInput from '@/components/StarRatingInput';
 
 const ReviewApp = () => {
   // Tip: You can grab data with fetch or an HTTP client of your choice:
@@ -7,10 +7,10 @@ const ReviewApp = () => {
 
   return (
     <div>
-      <StarRating />
+      <StarRatingInput />
     </div>
   );
 };
 
-ReviewApp.displayName = "ReviewApp";
+ReviewApp.displayName = 'ReviewApp';
 export default ReviewApp;
