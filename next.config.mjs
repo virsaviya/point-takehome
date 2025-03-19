@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['place-hold.it'],
+    domains: ['avatar.iran.liara.run'],
   },
 };
 

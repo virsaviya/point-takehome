@@ -2,9 +2,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import data from '@/data/reviewsData';
 import Review from '@/data/Review';
 
-const DEFAULT_PAGE_NUMBER = 1;
-const DEFAULT_PAGE_SIZE = 2;
-const MAX_PAGE_SIZE = 5;
+const DEFAULT_PAGE_NUMBER = 2;
+const DEFAULT_PAGE_SIZE = 8;
+const MAX_PAGE_SIZE = 10;
 
 const setPageSize = (input: number | null | undefined) => {
   if (!input) {
@@ -39,9 +39,9 @@ export default function handler(
     const startIndex = (page - 1) * pageSize;
     const endIndex = page * pageSize;
 
-    const dataset = data.filter(
-      (r: Review) => r.id > startIndex && r.id <= endIndex,
-    );
+    const dataset = data
+      .sort((a, b) => b.id - a.id) // get the most 'recent' reviews first
+      .filter((r: Review) => r.id > startIndex && r.id <= endIndex);
     res.status(200).json(dataset);
   } else {
     res.status(404);

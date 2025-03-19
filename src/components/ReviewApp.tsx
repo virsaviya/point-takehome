@@ -1,4 +1,4 @@
-import StarRatingInput from '@/components/StarRatingInput';
+import ReviewForm from '@/components/ReviewForm';
 import ExistingReviews from '@/components/ExistingReviews';
 
 const ReviewApp = () => {
@@ -8,7 +8,7 @@ const ReviewApp = () => {
 
   return (
     <div>
-      <StarRatingInput />
+      <ReviewForm />
       <ExistingReviews />
     </div>
   );

@@ -40,6 +40,7 @@ const StarRating = ({
         : {};
     stars.push(
       <Star
+        key={i}
         starId={i}
         marked={hoverRating === 0 && i <= rating}
         hovered={i <= hoverRating}
@@ -50,7 +51,7 @@ const StarRating = ({
     );
   }
 
-  return <div className="flex">{stars}</div>;
+  return <div className="flex mr-2">{stars}</div>;
 };
 
 StarRating.displayName = 'StarRating';

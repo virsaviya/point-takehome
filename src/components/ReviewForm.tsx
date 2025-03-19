@@ -3,7 +3,7 @@ import React from 'react';
 import Review from '@/data/Review';
 import StarRating from './StarRating';
 
-const StarRatingInput = () => {
+const ReviewForm = () => {
   const [rating, setRating] = React.useState<number>(0);
   const [hoverRating, setHoverRating] = React.useState<number>(0);
 
@@ -17,6 +17,7 @@ const StarRatingInput = () => {
     };
 
     postReview(newReview);
+    e.currentTarget.reset();
   };
 
   const postReview = async (review: Omit<Review, 'id'>) => {
@@ -33,7 +34,6 @@ const StarRatingInput = () => {
         );
 
       const submittedReview = await resp.json();
-      console.log('success!', submittedReview);
     } catch (err) {
       throw new Error(
         'An error occurred submitting the review, please try again.',
@@ -45,22 +45,33 @@ const StarRatingInput = () => {
     <form
       onSubmit={handleSubmit}
       method="post"
-      className="flex flex-col items-center"
+      className="flex flex-col justify-center align-center"
     >
-      <StarRating
-        rating={rating}
-        isInput={true}
-        size="l"
-        setRating={setRating}
-        hoverRating={hoverRating}
-        setHoverRating={setHoverRating}
+      <div className="flex space-between mb-2">
+        <StarRating
+          rating={rating}
+          isInput={true}
+          size="l"
+          setRating={setRating}
+          hoverRating={hoverRating}
+          setHoverRating={setHoverRating}
+        />
+        <input name="rating" type="hidden" value={rating} />
+        <input
+          className="p-1 w-full text-sm"
+          name="author"
+          type="text"
+          placeholder="Your name"
+        />
+      </div>
+      <textarea
+        className="p-1 mb-2 w-full min-h-[100px] text-sm"
+        name="review"
+        placeholder="Write a review..."
       />
-      <input name="rating" type="hidden" value={rating} />
-      <input name="author" type="text" placeholder="author" />
-      <textarea name="review" placeholder="Write a review..." />
       <input
+        className="h-10 px-6 font-semibold rounded-md text-white disabled:opacity-50 disabled:cursor-not-allowed"
         type="submit"
-        className="mt-10 h-10 px-6 font-semibold rounded-md text-white"
         value="Submit review"
         disabled={rating === 0}
       />
@@ -68,5 +79,5 @@ const StarRatingInput = () => {
   );
 };
 
-StarRatingInput.displayName = 'StarRatingInput';
-export default StarRatingInput;
+ReviewForm.displayName = 'ReviewForm';
+export default ReviewForm;
